@@ -1,3 +1,3 @@
-# Horse.Prototype
+# Hotel.Prototype
 
-Horse S&B Prototype
+Hotel S&B Prototype
