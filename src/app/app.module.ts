@@ -9,14 +9,13 @@ import { VocabularyService } from 'h21-be-ui-kit';
 import { H21RightOverlayPanelService } from 'h21-be-ui-kit';
 import { AppSubscriberService } from 'h21-be-ui-kit';
 import { OrderService } from 'h21-be-ui-kit';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app/app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './modules/app-material.module';
 import { H21HeaderModule, H21SidebarModule, H21TopToolbarModule } from 'h21-be-ui-kit';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 
 const routes: Routes = [
   {path: '', redirectTo: '/', pathMatch: 'full'},

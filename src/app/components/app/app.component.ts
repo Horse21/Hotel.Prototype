@@ -7,7 +7,7 @@ import { PermissionService } from 'h21-be-ui-kit';
 import { H21SidebarComponent } from 'h21-be-ui-kit';
 import { H21TopToolbarComponent } from 'h21-be-ui-kit';
 import { H21RightOverlayPanelService } from 'h21-be-ui-kit';
-import { AuthData } from './dto/auth-data';
+import { AuthData } from '../../dto/auth-data';
 
 @Component({
   selector: 'app-root',
