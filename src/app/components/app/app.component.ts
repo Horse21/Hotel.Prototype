@@ -8,6 +8,7 @@ import { H21SidebarComponent } from 'h21-be-ui-kit';
 import { H21TopToolbarComponent } from 'h21-be-ui-kit';
 import { H21RightOverlayPanelService } from 'h21-be-ui-kit';
 import { AuthData } from '../../dto/auth-data';
+import {IMarker} from "../../dto/map/i-marker";
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,11 @@ export class AppComponent {
 	title = 'prototype';
 	username: string;
 	private permissionService: PermissionService;
+
+	markers: IMarker[] = [
+		{position: {lat:55.6, lng: 37.3}, title: '1'},
+		{position: {lat:55.5, lng: 37.4}, title: '2'},
+		{position: {lat:55.4, lng: 37.5}, title: '3'}];
 
 	constructor(
 		iconReg: MatIconRegistry,

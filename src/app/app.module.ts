@@ -1,30 +1,32 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { NouisliderModule } from 'ng2-nouislider';
-import { PrototypePermissionService } from '../app/services/prototype-permission-service';
-import { PrototypeVocabularyService } from '../app/services/prototype-vocabulary-service';
-import { PermissionService } from 'h21-be-ui-kit';
-import { MatInputModule, MatNativeDateModule } from '@angular/material';
-import { VocabularyService } from 'h21-be-ui-kit';
-import { H21RightOverlayPanelService } from 'h21-be-ui-kit';
-import { AppSubscriberService } from 'h21-be-ui-kit';
-import { OrderService } from 'h21-be-ui-kit';
-import { AppComponent } from './components/app/app.component';
-import { RouterModule, Routes } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModule } from './modules/app-material.module';
-import { H21HeaderModule, H21SidebarModule, H21TopToolbarModule } from 'h21-be-ui-kit';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {NouisliderModule} from 'ng2-nouislider';
+import {PrototypePermissionService} from '../app/services/prototype-permission-service';
+import {PrototypeVocabularyService} from '../app/services/prototype-vocabulary-service';
+import {PermissionService} from 'h21-be-ui-kit';
+import {MatInputModule, MatNativeDateModule} from '@angular/material';
+import {VocabularyService} from 'h21-be-ui-kit';
+import {H21RightOverlayPanelService} from 'h21-be-ui-kit';
+import {AppSubscriberService} from 'h21-be-ui-kit';
+import {OrderService} from 'h21-be-ui-kit';
+import {AppComponent} from './components/app/app.component';
+import {RouterModule, Routes} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppMaterialModule} from './modules/app-material.module';
+import {H21HeaderModule, H21SidebarModule, H21TopToolbarModule} from 'h21-be-ui-kit';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {H21MapComponent} from './components/h21-map/h21-map.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: '**', redirectTo: '/'},
+	{path: '', redirectTo: '/', pathMatch: 'full'},
+	{path: '**', redirectTo: '/'},
 ];
 
 @NgModule({
 		declarations: [
-			AppComponent
+			AppComponent,
+			H21MapComponent
 		],
 		imports: [
 			BrowserModule,

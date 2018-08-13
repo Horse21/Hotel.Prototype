@@ -22,6 +22,7 @@
 		"@angular/platform-browser": "6.0.1",
 		"@angular/platform-browser-dynamic": "6.0.1",
 		"@angular/router": "6.0.1",
+		"@types/googlemaps": "^3.30.11",
 		"angular-gridster2": "3.18.0",
 		"bootstrap": "4.1.1",
 		"core-js": "^2.5.3",
