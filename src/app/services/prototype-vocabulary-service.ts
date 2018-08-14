@@ -1,12 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/internal/operators';
-import { VocabularyService } from 'h21-be-ui-kit';
-import { Observable } from 'rxjs';
-import { SearchFlightDto, Passenger, SearchResult, City } from 'h21-be-ui-kit';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {map} from 'rxjs/internal/operators';
+import {ICodeNamedEntity, VocabularyService} from 'h21-be-ui-kit';
+import {Observable} from 'rxjs';
+import {SearchFlightDto, Passenger, SearchResult, City} from 'h21-be-ui-kit';
 
 @Injectable()
 export class PrototypeVocabularyService implements VocabularyService {
+
+	roomType: ICodeNamedEntity[] = [
+		{id: 1, code: 'SNGL', name: 'Single'},
+		{id: 2, code: 'DBL', name: 'Double'},
+		{id: 3, code: 'TWIN', name: 'Twin'},
+		{id: 4, code: 'TRPL', name: 'Triple'},
+		{id: 5, code: 'PAX ', name: 'Pax'},
+		{id: 6, code: 'ADL', name: 'Adl'}
+	];
 
 	constructor(private _http: HttpClient) {
 	}
@@ -45,7 +54,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 		return this._http.get<Passenger[]>("../../assets/prototype-storage/passengers.json")
 			.pipe(map(data => {
 				return data.filter(x => (x.firstName && x.firstName.indexOf(pattern) != -1)
-										|| (x.surname && x.surname.indexOf(pattern) != -1))
+					|| (x.surname && x.surname.indexOf(pattern) != -1))
 					.filter((i, index) => (
 						index < 10
 					));
