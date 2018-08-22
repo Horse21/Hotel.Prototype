@@ -3,17 +3,24 @@ import {NgModule} from '@angular/core';
 import {NouisliderModule} from 'ng2-nouislider';
 import {PrototypePermissionService} from '../app/services/prototype-permission-service';
 import {PrototypeVocabularyService} from '../app/services/prototype-vocabulary-service';
-import {PermissionService} from 'h21-be-ui-kit';
 import {MatInputModule, MatNativeDateModule} from '@angular/material';
-import {VocabularyService} from 'h21-be-ui-kit';
-import {H21RightOverlayPanelService} from 'h21-be-ui-kit';
-import {AppSubscriberService} from 'h21-be-ui-kit';
-import {OrderService} from 'h21-be-ui-kit';
 import {AppComponent} from './components/app/app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './modules/app-material.module';
-import {H21HeaderModule, H21SidebarModule, H21TopToolbarModule} from 'h21-be-ui-kit';
+import {
+	AppSubscriberService,
+	VocabularyService,
+	OrderService,
+	PermissionService,
+	H21RightOverlayPanelService,
+	H21HeaderModule,
+	H21TopToolbarModule,
+	H21HotelSearchResultModule,
+	H21HotelFilterPanelModule,
+	H21HistoryPanelModule,
+	H21HotelSearchPanelModule, H21SidebarNavModule,
+} from 'h21-be-ui-kit';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {H21MapComponent} from './components/h21-map/h21-map.component';
@@ -40,8 +47,12 @@ const routes: Routes = [
 			MatNativeDateModule,
 			NouisliderModule,
 			H21HeaderModule,
-			H21SidebarModule,
-			H21TopToolbarModule
+			H21TopToolbarModule,
+			H21HotelSearchResultModule,
+			H21HotelFilterPanelModule,
+			H21HistoryPanelModule,
+			H21HotelSearchPanelModule,
+			H21SidebarNavModule,
 		],
 		providers: [
 			{

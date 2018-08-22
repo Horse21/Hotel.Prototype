@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
-import { INotifyItem } from 'h21-be-ui-kit';
+import {Component, ViewChild} from '@angular/core';
+import {MatIconRegistry, MatSidenav} from '@angular/material';
+import {
+	H21HotelSearchResultComponent,
+	INotifyItem,
+	ISearchHotelOptions,
+	ISidebarNavTab
+} from 'h21-be-ui-kit';
 import { PermissionService } from 'h21-be-ui-kit';
-import { H21SidebarComponent } from 'h21-be-ui-kit';
-import { H21TopToolbarComponent } from 'h21-be-ui-kit';
-import { H21RightOverlayPanelService } from 'h21-be-ui-kit';
 import { AuthData } from '../../dto/auth-data';
-import {IMarker} from "../../dto/map/i-marker";
+import { IMarker } from "../../dto/map/i-marker";
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,7 @@ import {IMarker} from "../../dto/map/i-marker";
   viewProviders: [MatIconRegistry],
 })
 export class AppComponent {
-	@ViewChild(H21SidebarComponent) private sidebar: H21SidebarComponent;
-	@ViewChild(H21TopToolbarComponent) private toolbar: H21TopToolbarComponent;
+
 	title = 'prototype';
 	username: string;
 	private permissionService: PermissionService;
@@ -28,23 +27,11 @@ export class AppComponent {
 		{position: {lat:55.5, lng: 37.4}, title: '2'},
 		{position: {lat:55.4, lng: 37.5}, title: '3'}];
 
-	constructor(
-		iconReg: MatIconRegistry,
-		sanitizer: DomSanitizer,
-		private http: HttpClient,
-		permissionService: PermissionService,
-		private rightPanelDialog: H21RightOverlayPanelService
-	) {
+	constructor(permissionService: PermissionService) {
 		this.permissionService = permissionService;
 		if(this.permissionService.isAuth()) {
 			this.username = this.permissionService.getUsername();
 		}
-		iconReg.addSvgIcon('logo', sanitizer.bypassSecurityTrustResourceUrl('./assets/img/horse21-logo.svg'));
-		iconReg.addSvgIcon('h21_baggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-baggage-blue.svg'));
-		iconReg.addSvgIcon('h21_no_baggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-baggage-gray.svg'));
-		iconReg.addSvgIcon('h21_luggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-luggage-blue.svg'));
-		iconReg.addSvgIcon('h21_no_luggage', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-no-luggage-gray.svg'));
-		iconReg.addSvgIcon('h21_night', sanitizer.bypassSecurityTrustResourceUrl('./assets/icons/h21-night-blue.svg'));
 	}
 
 	prototypeAuth(data: any): void {
@@ -69,11 +56,54 @@ export class AppComponent {
 		];
 	}
 
-	showSidebar(): void {
-		this.sidebar.visibilityToggle();
+
+	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
+	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
+
+	activeLeftSidenavPanel: string = 'search';
+	sidenavOpened: boolean = true;
+	searchResultVisibility: boolean = false;
+	searchResultViewMode: string = 'list';
+	sidebarNavDisabled: boolean = false;
+
+	leftSidenavToggle() {
+		this.leftSidenav.toggle();
+		if (this.leftSidenav.opened) {
+			this.sidebarNavDisabled = false;
+			this.searchResultViewMode = 'list';
+			this.sidenavOpened = true;
+		} else {
+			this.sidebarNavDisabled = true;
+			this.sidenavOpened = false;
+		}
 	}
 
-	openHelpSection(): void {
-		this.rightPanelDialog.open('h21-help');
+	showSidebarPanel(tab: ISidebarNavTab): void {
+		if (!this.leftSidenav.opened) {
+			this.leftSidenavToggle();
+		}
+		this.activeLeftSidenavPanel = tab.name;
 	}
+
+	search(options: ISearchHotelOptions): void {
+		this.searchResultVisibility = true;
+		setTimeout(() => {
+			this.searchResult.search(options);
+		}, 0);
+	}
+
+	clearSearch(): void {
+		this.searchResultVisibility = false;
+		this.searchResult.clear();
+	}
+
+	changeResultViewMode(mode: string): void {
+		this.searchResultViewMode = mode;
+
+		if (mode == 'map') {
+			this.leftSidenavToggle();
+		}
+	}
+
+
 }
