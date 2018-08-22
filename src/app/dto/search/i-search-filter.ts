@@ -6,6 +6,7 @@ export interface ISearchFilter {
 	nationality?: number;
 	adultQuantity?: number;
 	childQuantity?: number;
+	children? : number[];
 	roomQuantity?: number;
 
 	hotelName?: string;
