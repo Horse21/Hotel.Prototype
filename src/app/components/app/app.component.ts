@@ -2,13 +2,21 @@ import {Component, ViewChild} from '@angular/core';
 import {MatIconRegistry, MatSidenav} from '@angular/material';
 import {
 	H21HotelSearchResultComponent,
+	IHotelSearchOptions,
 	INotifyItem,
-	ISearchHotelOptions,
-	ISidebarNavTab
+	ISidebarNavTab,
 } from 'h21-be-ui-kit';
 import { PermissionService } from 'h21-be-ui-kit';
 import { AuthData } from '../../dto/auth-data';
 import { IMarker } from "../../dto/map/i-marker";
+import {Router} from "@angular/router";
+
+const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
+	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
+	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true},
+	{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
+	{name: 'hotel_book', label: 'Hotel book', icon: 'domain', type: 'button', url: null, disabled: false},
+];
 
 @Component({
   selector: 'app-root',
@@ -16,6 +24,7 @@ import { IMarker } from "../../dto/map/i-marker";
   styleUrls: ['./app.component.css'],
   viewProviders: [MatIconRegistry],
 })
+
 export class AppComponent {
 
 	title = 'prototype';
@@ -27,7 +36,8 @@ export class AppComponent {
 		{position: {lat:55.5, lng: 37.4}, title: '2'},
 		{position: {lat:55.4, lng: 37.5}, title: '3'}];
 
-	constructor(permissionService: PermissionService) {
+	constructor(permissionService: PermissionService,
+				private _router: Router) {
 		this.permissionService = permissionService;
 		if(this.permissionService.isAuth()) {
 			this.username = this.permissionService.getUsername();
@@ -61,12 +71,18 @@ export class AppComponent {
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
 	activeLeftSidenavPanel: string = 'search';
-	sidenavOpened: boolean = true;
+	sidenavOpened: boolean = false;
 	searchResultVisibility: boolean = false;
 	searchResultViewMode: string = 'list';
-	sidebarNavDisabled: boolean = false;
+	sidebarNavDisabled: boolean = true;
+	sidebarNavTabs: Array<ISidebarNavTab> = SIDEBAR_NAV_TABS;
 
-	leftSidenavToggle() {
+	leftSidenavToggle(): void {
+
+		if (this._router.url.indexOf('hotel_book') >= 0) {
+			return;
+		}
+
 		this.leftSidenav.toggle();
 		if (this.leftSidenav.opened) {
 			this.sidebarNavDisabled = false;
@@ -78,15 +94,25 @@ export class AppComponent {
 		}
 	}
 
-	showSidebarPanel(tab: ISidebarNavTab): void {
+	sidebarNavAction(tab: ISidebarNavTab): void {
+		if (tab.name == 'hotel_book') {
+			if (this.searchResult) {
+				this.clearSearch();
+			}
+			this.sidebarNavDisabled = true;
+			this.sidenavOpened = false;
+			window.open('/hotel_book');
+			return;
+		}
 		if (!this.leftSidenav.opened) {
 			this.leftSidenavToggle();
 		}
 		this.activeLeftSidenavPanel = tab.name;
 	}
 
-	search(options: ISearchHotelOptions): void {
+	search(options: IHotelSearchOptions): void {
 		this.searchResultVisibility = true;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
 		setTimeout(() => {
 			this.searchResult.search(options);
 		}, 0);
@@ -94,16 +120,11 @@ export class AppComponent {
 
 	clearSearch(): void {
 		this.searchResultVisibility = false;
+		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
 		this.searchResult.clear();
 	}
 
 	changeResultViewMode(mode: string): void {
 		this.searchResultViewMode = mode;
-
-		if (mode == 'map') {
-			this.leftSidenavToggle();
-		}
 	}
-
-
 }
