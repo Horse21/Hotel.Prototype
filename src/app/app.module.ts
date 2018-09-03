@@ -19,21 +19,26 @@ import {
 	H21HotelSearchResultModule,
 	H21HotelFilterPanelModule,
 	H21HistoryPanelModule,
-	H21HotelSearchPanelModule, H21SidebarNavModule,
+	H21HotelSearchPanelModule,
+	H21SidebarNavModule,
+	H21HotelBookModule,
+	H21HotelBookComponent,
 } from 'h21-be-ui-kit';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {H21MapComponent} from './components/h21-map/h21-map.component';
 
 const routes: Routes = [
-	{path: '', redirectTo: '/', pathMatch: 'full'},
+	{path: '', redirectTo: 'map', pathMatch: 'full'},
+	{path: 'map', component: H21MapComponent},
+	{path: 'hotel_book', component: H21HotelBookComponent},
 	{path: '**', redirectTo: '/'},
 ];
 
 @NgModule({
 		declarations: [
 			AppComponent,
-			H21MapComponent
+			H21MapComponent,
 		],
 		imports: [
 			BrowserModule,
@@ -53,6 +58,7 @@ const routes: Routes = [
 			H21HistoryPanelModule,
 			H21HotelSearchPanelModule,
 			H21SidebarNavModule,
+			H21HotelBookModule,
 		],
 		providers: [
 			{

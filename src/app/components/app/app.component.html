@@ -10,7 +10,6 @@
 			</h21-header>
 			<h21-top-toolbar [showSidenavToggle]="true"
 							 [sidenavOpened]="sidenavOpened"
-							 [showSearchResultViewModeToggle]="true"
 							 [showLanguageControl]="true"
 							 [showCurrencyControl]="true"
 							 (onSidenavToggle)="leftSidenavToggle()"></h21-top-toolbar>
@@ -20,9 +19,10 @@
 		<div class="col-12 no-gutters __has-sidebar">
 			<h21-sidebar-nav [selected]="'start'"
 							 [disabled]="sidebarNavDisabled"
-							 (onChanged)="showSidebarPanel($event)"></h21-sidebar-nav>
+							 [(tabs)]="sidebarNavTabs"
+							 (onChanged)="sidebarNavAction($event)"></h21-sidebar-nav>
 			<mat-sidenav-container [hasBackdrop]="false" autosize>
-				<mat-sidenav #leftSidenav mode="over" [opened]="sidenavOpened" class="page_left-sidenav">
+				<mat-sidenav #leftSidenav mode="side" [opened]="sidenavOpened" class="page_left-sidenav">
 					<div class="page_left-sidenav-inner">
 						<div class="page_sidenav-search-actions">
 							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search'"
@@ -34,17 +34,20 @@
 							<h21-history-panel *ngIf="activeLeftSidenavPanel == 'history'"></h21-history-panel>
 						</div>
 						<div class="page_sidenav-search-result" *ngIf="searchResultVisibility"
-							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'" >
+							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'"
+							 [class.page_sidenav-search-result__map]="searchResultViewMode == 'map'">
 							<h21-hotel-search-result [viewMode]="searchResultViewMode" #searchResult></h21-hotel-search-result>
 						</div>
 					</div>
 				</mat-sidenav>
 				<mat-sidenav-content>
 					<div class="map-box">
-						<h21-map [markers]="markers"></h21-map>
+						<router-outlet></router-outlet>
+						<!--<h21-map [markers]="markers"></h21-map>-->
 					</div>
 				</mat-sidenav-content>
 			</mat-sidenav-container>
 		</div>
 	</div>
+	<!--<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>-->
 </div>

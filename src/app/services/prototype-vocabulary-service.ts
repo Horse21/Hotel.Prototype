@@ -2,8 +2,14 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {map} from 'rxjs/internal/operators';
 import {ICodeNamedEntity, VocabularyService} from 'h21-be-ui-kit';
-import {Observable} from 'rxjs';
+import {Observable, Subscriber} from 'rxjs';
 import {SearchFlightDto, Passenger, SearchResult, City} from 'h21-be-ui-kit';
+import {
+	IHotelInfo,
+	IHotelOption,
+	IHotelSearchOptions
+} from "h21-be-ui-kit/dto";
+
 
 @Injectable()
 export class PrototypeVocabularyService implements VocabularyService {
@@ -60,4 +66,76 @@ export class PrototypeVocabularyService implements VocabularyService {
 					));
 			}));
 	}
+
+
+	public searchHotels(options: IHotelSearchOptions): Observable<IHotelInfo[]> {
+		var data = [
+			<IHotelInfo> {
+				id: 1,
+				photo: '../../assets/samples_img/hotel_card/hotel-1.jpg',
+				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
+				rate: 5,
+				isFavorite: false,
+				location: 'Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands',
+				options: [
+					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
+					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
+				],
+				provider: 'GTA',
+				price: 175.24,
+				fee: 1.54,
+			},
+			<IHotelInfo> {
+				id: 2,
+				photo: '../../assets/samples_img/hotel_card/hotel-2.jpg',
+				name: 'NH Amsterdam Schiller',
+				rate: 4,
+				isFavorite: true,
+				location: 'Rembrandtplein 26-36, Amsterdam, Netherlands, 1017 CV',
+				options: [
+					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
+					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
+				],
+				provider: 'GTA',
+				price: 275.24,
+				fee: 1.54,
+			},
+			<IHotelInfo> {
+				id: 3,
+				photo: '../../assets/samples_img/hotel_card/hotel-1.jpg',
+				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
+				rate: 5,
+				isFavorite: false,
+				location: 'Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands',
+				options: [
+					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
+					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
+				],
+				provider: 'GTA',
+				price: 375.24,
+				fee: 1.54,
+			},
+			<IHotelInfo> {
+				id: 4,
+				photo: '../../assets/samples_img/hotel_card/hotel-2.jpg',
+				name: 'NH Amsterdam Schiller',
+				rate: 3,
+				isFavorite: false,
+				location: 'Rembrandtplein 26-36, Amsterdam, Netherlands, 1017 CV',
+				options: [
+					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
+					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
+				],
+				provider: 'GTA',
+				price: 475.24,
+				fee: 1.54,
+			},
+		];
+		return Observable.create((observer: Subscriber<any>) => {
+			observer.next(data);
+			observer.complete();
+		});
+	}
+
+
 }
