@@ -30,7 +30,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 		if (!pattern || pattern.length < 2) {
 			return Observable.create();
 		}
-		return this._http.get<City[]>("../../assets/prototype-storage/Cities.json")
+		return this._http.get<City[]>("./assets/prototype-storage/Cities.json")
 			.pipe(map(data => {
 				return data.filter(x => x.name.indexOf(pattern) != -1)
 					.filter((i, index) => (
@@ -43,11 +43,11 @@ export class PrototypeVocabularyService implements VocabularyService {
 
 		switch (options.searchMode) {
 			case 'round_trip':
-				return this._http.get<SearchResult>('../../assets/prototype-storage/round-trip.json');
+				return this._http.get<SearchResult>('./assets/prototype-storage/round-trip.json');
 			case 'one_way':
-				return this._http.get<SearchResult>('../../assets/prototype-storage/one-way.json');
+				return this._http.get<SearchResult>('./assets/prototype-storage/one-way.json');
 			case 'multi_city':
-				return this._http.get<SearchResult>('../../assets/prototype-storage/multicity.json');
+				return this._http.get<SearchResult>('./assets/prototype-storage/multicity.json');
 			default:
 				return undefined;
 		}
@@ -57,7 +57,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 		if (!pattern) {
 			return Observable.create();
 		}
-		return this._http.get<Passenger[]>("../../assets/prototype-storage/passengers.json")
+		return this._http.get<Passenger[]>("./assets/prototype-storage/passengers.json")
 			.pipe(map(data => {
 				return data.filter(x => (x.firstName && x.firstName.indexOf(pattern) != -1)
 					|| (x.surname && x.surname.indexOf(pattern) != -1))
@@ -72,7 +72,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 		var data = [
 			<IHotelInfo> {
 				id: 1,
-				photo: '../../assets/samples_img/hotel_card/hotel-1.jpg',
+				photo: './assets/samples_img/hotel_card/hotel-1.jpg',
 				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
 				rate: 5,
 				isFavorite: false,
@@ -87,7 +87,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 			},
 			<IHotelInfo> {
 				id: 2,
-				photo: '../../assets/samples_img/hotel_card/hotel-2.jpg',
+				photo: './assets/samples_img/hotel_card/hotel-2.jpg',
 				name: 'NH Amsterdam Schiller',
 				rate: 4,
 				isFavorite: true,
@@ -102,7 +102,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 			},
 			<IHotelInfo> {
 				id: 3,
-				photo: '../../assets/samples_img/hotel_card/hotel-1.jpg',
+				photo: './assets/samples_img/hotel_card/hotel-1.jpg',
 				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
 				rate: 5,
 				isFavorite: false,
@@ -117,7 +117,7 @@ export class PrototypeVocabularyService implements VocabularyService {
 			},
 			<IHotelInfo> {
 				id: 4,
-				photo: '../../assets/samples_img/hotel_card/hotel-2.jpg',
+				photo: './assets/samples_img/hotel_card/hotel-2.jpg',
 				name: 'NH Amsterdam Schiller',
 				rate: 3,
 				isFavorite: false,

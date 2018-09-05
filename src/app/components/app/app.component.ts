@@ -101,7 +101,7 @@ export class AppComponent {
 			}
 			this.sidebarNavDisabled = true;
 			this.sidenavOpened = false;
-			window.open('/hotel_book');
+			window.open('./hotel_book');
 			return;
 		}
 		if (!this.leftSidenav.opened) {
