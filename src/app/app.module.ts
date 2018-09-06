@@ -31,7 +31,7 @@ import {H21MapComponent} from './components/h21-map/h21-map.component';
 const routes: Routes = [
 	{path: '', redirectTo: 'map', pathMatch: 'full'},
 	{path: 'map', component: H21MapComponent},
-	{path: 'hotel_book', component: H21HotelBookComponent},
+	{path: 'hotelbook/:id', component: H21HotelBookComponent},
 	{path: '**', redirectTo: '/'},
 ];
 

@@ -1,15 +1,12 @@
 <div class="container-fluid page_box mat-typography">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
-			<h21-header [isPrototype]="true"
-						(onPrototypeAuth)="prototypeAuth($event)"
-						[username]="username"
-						(onLogout)="logout()"
-						[logotypeUrl]="'./assets/img/logo.svg'"
-						[notifyList]="getNotifyList()">
-			</h21-header>
+			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
+						[logotypeUrl]="'./assets/img/logo.svg'"></h21-header>
 			<h21-top-toolbar [showSidenavToggle]="true"
+							 [sidenavToggleDisabled]="isRoute('hotelbook')"
 							 [sidenavOpened]="sidenavOpened"
+							 [showCart]="true"
 							 [showLanguageControl]="true"
 							 [showCurrencyControl]="true"
 							 (onSidenavToggle)="leftSidenavToggle()"></h21-top-toolbar>
@@ -17,21 +14,32 @@
 	</div>
 	<div class="row no-gutters page_content-box">
 		<div class="col-12 no-gutters __has-sidebar">
-			<h21-sidebar-nav [selected]="'start'"
+			<h21-sidebar-nav [selected]="sidebarNavActiveTab"
 							 [disabled]="sidebarNavDisabled"
 							 [(tabs)]="sidebarNavTabs"
 							 (onChanged)="sidebarNavAction($event)"></h21-sidebar-nav>
-			<mat-sidenav-container [hasBackdrop]="false" autosize>
-				<mat-sidenav #leftSidenav mode="side" [opened]="sidenavOpened" class="page_left-sidenav">
+			<mat-sidenav-container [hasBackdrop]="contentSidenavHasBackdrop" autosize>
+
+				<mat-sidenav #leftSidenav
+							 position="start"
+							 [mode]="'side'"
+							 [opened]="leftSidenavOpened || isRoute('hotelbook')"
+							 class="page_left-sidenav">
 					<div class="page_left-sidenav-inner">
 						<div class="page_sidenav-search-actions">
-							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search'"
+							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search' && !isRoute('hotelbook')"
+													(onSearch)="search($event)"
+													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
+							<h21-hotel-search-panel *ngIf="isRoute('hotelbook')"
+													[searchMode]="'room'"
 													(onSearch)="search($event)"
 													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
 							<h21-hotel-filter-panel *ngIf="activeLeftSidenavPanel == 'filter'"
 													[viewMode]="searchResultViewMode"
 													(onChangeViewMode)="changeResultViewMode($event)"></h21-hotel-filter-panel>
 							<h21-history-panel *ngIf="activeLeftSidenavPanel == 'history'"></h21-history-panel>
+
+
 						</div>
 						<div class="page_sidenav-search-result" *ngIf="searchResultVisibility"
 							 [class.page_sidenav-search-result__grid]="searchResultViewMode == 'grid'"
@@ -40,14 +48,22 @@
 						</div>
 					</div>
 				</mat-sidenav>
-				<mat-sidenav-content>
+
+				<mat-sidenav #rightSidenav
+							 position="end"
+							 [mode]="rightSidenavMode"
+							 [opened]="rightSidenavOpened"
+							 [fixedInViewport]="true"
+							 [fixedTopGap]="0"
+							 [fixedBottomGap]="0"
+							 class="page_right-sidenav">
+				</mat-sidenav>
+
+				<mat-sidenav-content #contentSidenav>
 					<div class="map-box">
 						<router-outlet></router-outlet>
-						<!--<h21-map [markers]="markers"></h21-map>-->
 					</div>
 				</mat-sidenav-content>
 			</mat-sidenav-container>
 		</div>
 	</div>
-	<!--<button mat-fab class="page_help-btn" (click)="openHelpSection()" color="warn">?</button>-->
-</div>
