@@ -15,7 +15,6 @@ const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
 	{name: 'search', label: 'Search', icon: 'search', type: 'button', url: null, disabled: false},
 	{name: 'filter', label: 'Filter', icon: 'filter_list', type: 'button', url: null, disabled: true},
 	{name: 'history', label: 'History', icon: 'history', type: 'button', url: null, disabled: false},
-	{name: 'hotel_book', label: 'Hotel book', icon: 'domain', type: 'button', url: null, disabled: false},
 ];
 
 @Component({
@@ -68,6 +67,8 @@ export class AppComponent {
 
 
 	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
+	@ViewChild('rightSidenav') private rightSidenav: MatSidenav;
+	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
 	activeLeftSidenavPanel: string = 'search';
@@ -76,6 +77,18 @@ export class AppComponent {
 	searchResultViewMode: string = 'list';
 	sidebarNavDisabled: boolean = true;
 	sidebarNavTabs: Array<ISidebarNavTab> = SIDEBAR_NAV_TABS;
+	sidebarNavActiveTab: string = '';
+
+	/* Left sidenav configuration */
+	leftSidenavOpened: boolean = false;
+	leftSidenavMode: string = ''; // 'side', 'over', 'push'
+
+	/* Right sidenav configuration */
+	rightSidenavOpened: boolean = false;
+	rightSidenavMode: string = ''; // 'side', 'over', 'push'
+
+	/* Sidenav content configuration */
+	contentSidenavHasBackdrop: boolean = false;
 
 	leftSidenavToggle(): void {
 
@@ -95,15 +108,6 @@ export class AppComponent {
 	}
 
 	sidebarNavAction(tab: ISidebarNavTab): void {
-		if (tab.name == 'hotel_book') {
-			if (this.searchResult) {
-				this.clearSearch();
-			}
-			this.sidebarNavDisabled = true;
-			this.sidenavOpened = false;
-			window.open('./hotel_book');
-			return;
-		}
 		if (!this.leftSidenav.opened) {
 			this.leftSidenavToggle();
 		}
@@ -115,6 +119,8 @@ export class AppComponent {
 		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = false;
 		setTimeout(() => {
 			this.searchResult.search(options);
+			this.activeLeftSidenavPanel = 'filter';
+			this.sidebarNavActiveTab = 'filter';
 		}, 0);
 	}
 
@@ -126,5 +132,9 @@ export class AppComponent {
 
 	changeResultViewMode(mode: string): void {
 		this.searchResultViewMode = mode;
+	}
+
+	isRoute(route: string){
+		return this._router.url.indexOf(route) >= 0;
 	}
 }
