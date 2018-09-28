@@ -4,6 +4,168 @@ import {IMarker} from "../../dto/map/i-marker";
 import Marker = google.maps.Marker;
 import {IPosition} from "../../dto/map/i-position";
 
+
+const MAP_STYLE = [
+	{
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#F4F4F2"
+			}
+		]
+	},
+	{
+		elementType: "labels.icon",
+		stylers: [
+			{
+				"visibility": "off"
+			}
+		]
+	},
+	{
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#646363"
+			}
+		]
+	},
+	{
+		elementType: "labels.text.stroke",
+		stylers: [
+			{
+				"color": "#f5f5f5"
+			}
+		]
+	},
+	{
+		featureType: "administrative.land_parcel",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#ededed"
+			}
+		]
+	},
+	{
+		featureType: "poi",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#eeeeee"
+			}
+		]
+	},
+	{
+		featureType: "poi",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#757575"
+			}
+		]
+	},
+	{
+		featureType: "poi.park",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#e5e5e5"
+			}
+		]
+	},
+	{
+		featureType: "poi.park",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#9e9e9e"
+			}
+		]
+	},
+	{
+		featureType: "road",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#ffffff"
+			}
+		]
+	},
+	{
+		featureType: "road.arterial",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#757575"
+			}
+		]
+	},
+	{
+		featureType: "road.highway",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#dadada"
+			}
+		]
+	},
+	{
+		featureType: "road.highway",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#616161"
+			}
+		]
+	},
+	{
+		featureType: "road.local",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#9e9e9e"
+			}
+		]
+	},
+	{
+		featureType: "transit.line",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#e5e5e5"
+			}
+		]
+	},
+	{
+		featureType: "transit.station",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#eeeeee"
+			}
+		]
+	},
+	{
+		featureType: "water",
+		elementType: "geometry",
+		stylers: [
+			{
+				"color": "#CAD2D3"
+			}
+		]
+	},
+	{
+		featureType: "water",
+		elementType: "labels.text.fill",
+		stylers: [
+			{
+				"color": "#9e9e9e"
+			}
+		]
+	}
+];
+
 @Component({
 	selector: 'h21-map',
 	templateUrl: './h21-map.component.html',
@@ -52,9 +214,14 @@ export class H21MapComponent implements AfterContentInit {
 
 	createMap(){
 		let mapProp = {
-			center: this.center,
-			zoom: 5,
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+			center: new google.maps.LatLng(27.215556209029693, 18.45703125),
+			zoom: 3,
+			disableDefaultUI: true,
+			minZoom: 3,
+			scaleControl: true,
+			draggableCursor: 'default',
+			disableDoubleClickZoom: true,
+			styles: MAP_STYLE
 		};
 
 		this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);

@@ -42,3 +42,14 @@ $zucchetti-fg-light: #4f5a7c;
 	}
 }
 
+.c-h21-sidebar_nav {
+	box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+.__has-active-sidenav {
+	.c-h21-sidebar_nav {
+		box-shadow: none;
+	}
+}
+.page_left-sidenav {
+	box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.2);
+}
