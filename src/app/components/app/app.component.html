@@ -1,11 +1,13 @@
 <div class="container-fluid page_box mat-typography">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
-			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
-						[logotypeUrl]="'./assets/img/logo.svg'"></h21-header>
+			<h21-header [userName]="userName"
+						[userCardData]="userCardData"
+						[logotypeUrl]="'./assets/img/logo.svg'"
+						(onLogout)="logout()"></h21-header>
 			<h21-top-toolbar [showSidenavToggle]="true"
-							 [sidenavToggleDisabled]="isRoute('hotelbook')"
-							 [sidenavOpened]="sidenavOpened"
+							 [sidenavToggleDisabled]="sidenavToggleDisabled"
+							 [sidenavOpened]="sidenavOpened && !isRoute('hotelbook')"
 							 [showCart]="true"
 							 [showLanguageControl]="true"
 							 [showCurrencyControl]="true"
@@ -23,15 +25,12 @@
 				<mat-sidenav #leftSidenav
 							 position="start"
 							 [mode]="'side'"
-							 [opened]="leftSidenavOpened || isRoute('hotelbook')"
+							 [opened]="sidenavOpened"
 							 class="page_left-sidenav">
 					<div class="page_left-sidenav-inner">
 						<div class="page_sidenav-search-actions">
-							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search' && !isRoute('hotelbook')"
-													(onSearch)="search($event)"
-													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
-							<h21-hotel-search-panel *ngIf="isRoute('hotelbook')"
-													[searchMode]="'room'"
+							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search'"
+													[searchMode]="searchMode"
 													(onSearch)="search($event)"
 													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
 							<h21-hotel-filter-panel *ngIf="activeLeftSidenavPanel == 'filter'"
@@ -67,3 +66,4 @@
 			</mat-sidenav-container>
 		</div>
 	</div>
+</div>

@@ -1,0 +1,12 @@
+@import '~h21-be-ui-kit/h21-theme.scss';
+
+html, body {
+	min-height: 100%;
+	font-family: mat-font-family($h21-mat-typography);
+	color: $h21-fg-base;
+}
+
+.c-h21-combobox_button.mat-button {
+	margin: 0 0 0 16px;
+	overflow: hidden;
+}
