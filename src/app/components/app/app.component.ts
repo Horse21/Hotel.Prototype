@@ -1,10 +1,10 @@
-import {Component, ViewChild} from '@angular/core';
+import {AfterContentChecked, Component, ViewChild} from '@angular/core';
 import {MatIconRegistry, MatSidenav} from '@angular/material';
 import {
 	H21HotelSearchResultComponent,
 	IHotelSearchOptions,
 	INotifyItem,
-	ISidebarNavTab,
+	ISidebarNavTab, IUserCardData,
 } from 'h21-be-ui-kit';
 import { PermissionService } from 'h21-be-ui-kit';
 import { AuthData } from '../../dto/auth-data';
@@ -24,7 +24,7 @@ const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
   viewProviders: [MatIconRegistry],
 })
 
-export class AppComponent {
+export class AppComponent implements AfterContentChecked {
 
 	title = 'prototype';
 	username: string;
@@ -41,6 +41,7 @@ export class AppComponent {
 		if(this.permissionService.isAuth()) {
 			this.username = this.permissionService.getUsername();
 		}
+		this.testInit();
 	}
 
 	prototypeAuth(data: any): void {
@@ -71,8 +72,13 @@ export class AppComponent {
 	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
+	userName: string;
+	userCardData: IUserCardData;
+
 	activeLeftSidenavPanel: string = 'search';
+	searchMode: 'hotel' | 'room' = 'hotel';
 	sidenavOpened: boolean = false;
+	sidenavToggleDisabled: boolean = false;
 	searchResultVisibility: boolean = false;
 	searchResultViewMode: string = 'list';
 	sidebarNavDisabled: boolean = true;
@@ -90,12 +96,27 @@ export class AppComponent {
 	/* Sidenav content configuration */
 	contentSidenavHasBackdrop: boolean = false;
 
-	leftSidenavToggle(): void {
-
-		if (this._router.url.indexOf('hotel_book') >= 0) {
-			return;
+	ngAfterContentChecked() {
+		if (this.isRoute('cart')) {
+			if (this.sidenavOpened) {
+				this.leftSidenavToggle();
+			}
+			this.sidenavToggleDisabled = true;
+			this.searchMode = 'hotel';
 		}
+		else if (this.isRoute('hotelbook')) {
+			this.sidenavOpened = true;
+			this.sidebarNavDisabled = true;
+			this.sidenavToggleDisabled = true;
+			this.searchMode = 'room';
+		}
+		else {
+			this.sidenavToggleDisabled = false;
+			this.searchMode = 'hotel';
+		}
+	}
 
+	leftSidenavToggle(): void {
 		this.leftSidenav.toggle();
 		if (this.leftSidenav.opened) {
 			this.sidebarNavDisabled = false;
@@ -136,5 +157,39 @@ export class AppComponent {
 
 	isRoute(route: string){
 		return this._router.url.indexOf(route) >= 0;
+	}
+
+	testInit() {
+		this.userName = 'Horse B.V. | Sergey Strovatikov';
+		this.userCardData = {
+			user: {
+				name: 'Sergey Strovatikov',
+				email: 'darkdes6@gmail.com',
+				avatarUrl: './assets/avatar-picture.png',
+			},
+			actions: [
+				{
+					name: 	'profile',
+					label:	'My profile',
+					icon:	'person',
+					route:	'profile',
+					type:	'link'
+				},
+				{
+					name: 	'orders',
+					label: 	'Orders',
+					icon: 	'insert_drive_file',
+					route: 	'orders',
+					type: 	'link'
+				},
+				{
+					name: 	'cart',
+					label: 	'Cart',
+					icon: 	'shopping_cart',
+					route: 	'cart',
+					type: 	'link'
+				}
+			]
+		};
 	}
 }
