@@ -1,0 +1,10 @@
+[
+	{"id": 1, "type": "city", "name": "Rome", "description": "(Italy)"},
+	{"id": 2, "type": "station", "name": "Rome", "description": "(International Airport)"},
+	{"id": 3, "type": "airport", "name": "Rome", "description": "(Central Station)"},
+	{"id": 4, "type": "building", "name": "Rome", "description": "(City Centre)"},
+	{"id": 5, "type": "building", "name": "Rome Glam Hotel", "description": "(Hotel)"},
+	{"id": 6, "type": "building", "name": "Camping Village Roma", "description": "(Hotel)"},
+	{"id": 7, "type": "building", "name": "Hotel Nord Nuova Roma", "description": "(Hotel)"},
+	{"id": 8, "type": "building", "name": "Eurostars Roma Aeterna", "description": "(Hotel)"}
+]

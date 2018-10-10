@@ -29,6 +29,7 @@
 					<div class="page_left-sidenav-inner">
 						<div class="page_sidenav-search-actions">
 							<h21-hotel-search-panel *ngIf="activeLeftSidenavPanel == 'search' && !isRoute('hotelbook')"
+													[destinationListUrl]="'./assets/prototype-storage/Destinations.json'"
 													(onSearch)="search($event)"
 													(onClearSearch)="clearSearch()"></h21-hotel-search-panel>
 							<h21-hotel-search-panel *ngIf="isRoute('hotelbook')"
