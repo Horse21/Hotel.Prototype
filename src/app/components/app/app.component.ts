@@ -5,10 +5,11 @@ import {
 	IHotelSearchOptions,
 	INotifyItem,
 	ISidebarNavTab,
+	PermissionService,
+	IUserCardData
 } from 'h21-be-ui-kit';
-import { PermissionService } from 'h21-be-ui-kit';
-import { AuthData } from '../../dto/auth-data';
-import { IMarker } from "../../dto/map/i-marker";
+import {AuthData} from '../../dto/auth-data';
+import {IMarker} from "../../dto/map/i-marker";
 import {Router} from "@angular/router";
 
 const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
@@ -26,8 +27,9 @@ const SIDEBAR_NAV_TABS: Array<ISidebarNavTab> = [
 
 export class AppComponent {
 
-	title = 'prototype';
-	username: string;
+	userName: string;
+	userCardData: IUserCardData;
+
 	private permissionService: PermissionService;
 
 	markers: IMarker[] = [
@@ -39,8 +41,9 @@ export class AppComponent {
 				private _router: Router) {
 		this.permissionService = permissionService;
 		if(this.permissionService.isAuth()) {
-			this.username = this.permissionService.getUsername();
+			this.userName = this.permissionService.getUsername();
 		}
+		this.init();
 	}
 
 	prototypeAuth(data: any): void {
@@ -65,10 +68,8 @@ export class AppComponent {
 		];
 	}
 
-
 	@ViewChild('leftSidenav') private leftSidenav: MatSidenav;
 	@ViewChild('rightSidenav') private rightSidenav: MatSidenav;
-	// @ViewChild('contentSidenav') private contentSidenav: MatSidenavContent;
 	@ViewChild('searchResult') private searchResult: H21HotelSearchResultComponent;
 
 	activeLeftSidenavPanel: string = 'search';
@@ -136,5 +137,25 @@ export class AppComponent {
 
 	isRoute(route: string){
 		return this._router.url.indexOf(route) >= 0;
+	}
+
+	init(): void {
+		this.userName = 'Zucchetti | Marco Montagni';
+		this.userCardData = {
+			user: {
+				name: 'Marco Montagni',
+				email: 'test@viaddi1.it',
+				avatarUrl: './assets/img/avatar.png',
+			},
+			actions: [
+				{
+					name: 	'profile',
+					label:	'My profile',
+					icon:	'person',
+					route:	'',
+					type:	'button'
+				}
+			]
+		};
 	}
 }

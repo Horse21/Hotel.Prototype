@@ -1,8 +1,9 @@
 <div class="container-fluid page_box mat-typography">
 	<div class="row no-gutters page_header-box">
 		<div class="col-12 no-gutters">
-			<h21-header [username]="'Horse B.V. | Serhey Strovatikov'"
-						[logotypeUrl]="'./assets/img/logo.svg'"></h21-header>
+			<h21-header [userName]="userName"
+						[logotypeUrl]="'./assets/img/logo.svg'"
+						[userCardData]="userCardData"></h21-header>
 			<h21-top-toolbar [showSidenavToggle]="true"
 							 [sidenavToggleDisabled]="isRoute('hotelbook')"
 							 [sidenavOpened]="sidenavOpened"
