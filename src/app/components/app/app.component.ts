@@ -146,9 +146,11 @@ export class AppComponent implements AfterContentChecked {
 	}
 
 	clearSearch(): void {
-		this.searchResultVisibility = false;
-		this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
-		this.searchResult.clear();
+		if (this.searchResult) {
+			this.searchResultVisibility = false;
+			this.sidebarNavTabs.find((item) => { return item.name == 'filter'; }).disabled = true;
+			this.searchResult.clear();
+		}
 	}
 
 	changeResultViewMode(mode: string): void {
