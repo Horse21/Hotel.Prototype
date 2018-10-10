@@ -1,0 +1,12 @@
+[
+	{"id": 1, "type": "city", "name": "Amsterdam", "description": "Netherlands"},
+	{"id": 2, "type": "airport", "name": "Amsterdam", "description": "Central Station"},
+	{"id": 3, "type": "station", "name": "Amsterdam", "description": "(AMS-Schiphol)"},
+	{"id": 4, "type": "building", "name": "Amsterdam", "description": "Court Hotel, New York, NY"},
+	{"id": 5, "type": "building", "name": "Fukuoka", "description": "City Centre"},
+	{"id": 6, "type": "building", "name": "Fukushima", "description": "City Centre"},
+	{"id": 7, "type": "building", "name": "Fukashinai", "description": "City Centre"},
+	{"id": 8, "type": "building", "name": "Flick", "description": "City Centre"},
+	{"id": 9, "type": "city", "name": "London", "description": "City Centre"},
+	{"id": 10, "type": "city", "name": "New York", "description": "City Centre"}
+]

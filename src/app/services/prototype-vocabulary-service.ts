@@ -67,7 +67,6 @@ export class PrototypeVocabularyService implements VocabularyService {
 			}));
 	}
 
-
 	public searchHotels(options: IHotelSearchOptions): Observable<IHotelInfo[]> {
 		var data = [
 			<IHotelInfo> {
