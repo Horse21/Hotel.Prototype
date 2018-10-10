@@ -73,10 +73,10 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 1,
 				photo: './assets/samples_img/hotel_card/hotel-1.jpg',
-				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
+				name: 'Roma Resort Colosseum',
 				rate: 5,
-				isFavorite: false,
-				location: 'Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands',
+				isFavorite: true,
+				location: 'Via Emanuele Filiberto 100, Central Station, 00185 Rome, Italy',
 				options: [
 					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
 					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
@@ -88,10 +88,10 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 2,
 				photo: './assets/samples_img/hotel_card/hotel-2.jpg',
-				name: 'NH Amsterdam Schiller',
+				name: 'Best Western Plus Hotel Spring House',
 				rate: 4,
 				isFavorite: true,
-				location: 'Rembrandtplein 26-36, Amsterdam, Netherlands, 1017 CV',
+				location: 'Via Mocenigo 7, Vatican City - Prati, 00192 Rome, Italy',
 				options: [
 					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
 					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
@@ -103,10 +103,10 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 3,
 				photo: './assets/samples_img/hotel_card/hotel-1.jpg',
-				name: 'Pestana Amsterdam Riverside – LVX Preferred Hotels & Resorts',
+				name: 'Roma Resort Colosseum',
 				rate: 5,
 				isFavorite: false,
-				location: 'Amsteldijk 67, Oud Zuid, 1074 HZ Amsterdam, Netherlands',
+				location: 'Via Emanuele Filiberto 100, Central Station, 00185 Rome, Italy',
 				options: [
 					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
 					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
@@ -118,10 +118,10 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 4,
 				photo: './assets/samples_img/hotel_card/hotel-2.jpg',
-				name: 'NH Amsterdam Schiller',
+				name: 'Best Western Plus Hotel Spring House',
 				rate: 3,
 				isFavorite: false,
-				location: 'Rembrandtplein 26-36, Amsterdam, Netherlands, 1017 CV',
+				location: 'Via Mocenigo 7, Vatican City - Prati, 00192 Rome, Italy',
 				options: [
 					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
 					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
