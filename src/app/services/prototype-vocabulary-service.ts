@@ -73,10 +73,10 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 1,
 				photo: './assets/samples_img/hotel_card/hotel-1.jpg',
-				name: 'Roma Resort Colosseum',
+				name: 'Hotel Champagne Palace',
 				rate: 5,
 				isFavorite: true,
-				location: 'Via Emanuele Filiberto 100, Central Station, 00185 Rome, Italy',
+				location: 'Via Principe Amedeo 82, Rome, Italy, 00185',
 				options: [
 					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
 					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
@@ -88,10 +88,10 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 2,
 				photo: './assets/samples_img/hotel_card/hotel-2.jpg',
-				name: 'Best Western Plus Hotel Spring House',
+				name: 'Hotel dei Consoli',
 				rate: 4,
 				isFavorite: true,
-				location: 'Via Mocenigo 7, Vatican City - Prati, 00192 Rome, Italy',
+				location: 'Via Varrone 2/D, Rome, Italy, 00193',
 				options: [
 					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
 					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
@@ -103,6 +103,19 @@ export class PrototypeVocabularyService implements VocabularyService {
 			<IHotelInfo> {
 				id: 3,
 				photo: './assets/samples_img/hotel_card/hotel-1.jpg',
+				name: 'Hotel Roma Aurelia Antica',
+				rate: 3,
+				isFavorite: false,
+				location: 'Via Degli Aldobrandeschi 223, Rome, Italy, 00163',
+				options: [
+					<IHotelOption> {icon: 'check_circle', name: 'Free cancellation'},
+					<IHotelOption> {icon: 'check_circle', name: 'Breakfast included'},
+				],
+				provider: 'GTA',
+				price: 475.24,
+				fee: 1.54,
+			},
+			<IHotelInfo> {
 				name: 'Roma Resort Colosseum',
 				rate: 5,
 				isFavorite: false,
@@ -116,8 +129,8 @@ export class PrototypeVocabularyService implements VocabularyService {
 				fee: 1.54,
 			},
 			<IHotelInfo> {
-				id: 4,
 				photo: './assets/samples_img/hotel_card/hotel-2.jpg',
+				id: 5,
 				name: 'Best Western Plus Hotel Spring House',
 				rate: 3,
 				isFavorite: false,
