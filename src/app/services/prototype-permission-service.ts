@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthData } from 'app/dto/auth-data';
+import { AuthData } from '../../app/dto/auth-data';
 import { PermissionService } from 'h21-be-ui-kit';
 
 @Injectable()
