@@ -29,8 +29,11 @@ import {
 	H21AccountSelectService,
 } from 'h21-be-ui-kit';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {H21MapComponent} from './components/h21-map/h21-map.component';
+import {environment} from '../environments/environment';
+import {AppInsightInterceptor} from './interceptors/app-insight-interceptor';
+import {AppInsightsService} from '@markpieszak/ng-application-insights';
 
 const routes: Routes = [
 	{path: '', redirectTo: 'map', pathMatch: 'full'},
@@ -81,11 +84,23 @@ const routes: Routes = [
 			H21RightOverlayPanelService,
 			AppSubscriberService,
 			H21AccountSelectService,
-			OrderService
+			OrderService,
+			{
+				provide: HTTP_INTERCEPTORS,
+				useClass: AppInsightInterceptor,
+				multi: true
+			}, AppInsightsService
 		],
 		bootstrap: [AppComponent],
 		entryComponents: []
 	}
 )
 export class AppModule {
+	constructor(private appInsightsService: AppInsightsService) {
+		appInsightsService.config = {
+			instrumentationKey: environment.AppInsightInstrumentationKey // <-- set it later sometime
+		};
+		// then make sure to initialize and start-up app insights
+		appInsightsService.init();
+	}
 }
